@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+.voorbeeld {
+  @apply w-96;
+}

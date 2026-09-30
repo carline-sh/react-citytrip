@@ -24,9 +24,9 @@ function App() {
       <div>
         <h1>Hello World</h1>
         <div>Amsterdam: {votesAmsterdam}</div>
-        <button onClick={voteAmsterdam}> vote</button>
+        <button onClick={voteAmsterdam}> vote <img className="voorbeeld" src="/amsterdam.jpg" alt="" /></button>
         <div>London: {votesLondon}</div>
-        <button onClick={voteLondon}> vote</button>
+        <button onClick={voteLondon}> vote <img className="voorbeeld" src="london.webp" alt="" /></button>
         <button onClick={reset}>Reset</button>
       </div>
       
