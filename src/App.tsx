@@ -7,12 +7,15 @@ const cities: City[] = [
   { name: "London", image: "/london.webp" }
 ];
 
+const maxvotes = 10;
 
 function App() {
-
   const [votes, setVotes] = useState<string[]>([]);
 
   function vote(city: string) {
+    if (votes.length >= maxvotes) {
+      return;
+    }
     setVotes([...votes, city]);
   }
 
@@ -24,22 +27,29 @@ function App() {
     <>
       <div>
         <h1>Hello World</h1>
-        <ul>
+        {
+          votes.length >= maxvotes && <div>You are done voting</div>
+        }
+        <ul className="flex gap-2">
           {cities.map(function (city) {
-            return (<div>harro {city.name}
-              <img src={city.image} className="voorbeeld" />
-              </div>)
+            const cityVotes = votes.filter(a => a == city.name).length;
+            return (<div className="border">harro {city.name}
+              <div>
+                {cityVotes}
+              </div>
+              <button onClick={() => vote(city.name)}>
+                <img src={city.image} className="voorbeeld" />
+              </button>
+            </div>)
           })}
         </ul>
-        {/* <div>Amsterdam: {votesAmsterdam}</div> */}
-        {/* <button onClick={voteAmsterdam}> vote <img className="voorbeeld" src="/amsterdam.jpg" alt="" /></button> */}
-        {/* <div>London: {votesLondon}</div> */}
-        {/* <button onClick={voteLondon}> vote <img className="voorbeeld" src="london.webp" alt="" /></button> */}
+        <div>
+          all the votes {JSON.stringify(votes)}
+        </div>
         <button onClick={reset}>Reset</button>
       </div>
-
     </>
   )
 }
 
-export default App
+export default App;
