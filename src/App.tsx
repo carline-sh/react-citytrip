@@ -1,35 +1,43 @@
 import { useState } from "react"
 
+type City = { name: string, image: string };
+
+const cities: City[] = [
+  { name: "Amsterdam", image: "/amsterdam.jpg" },
+  { name: "London", image: "/london.webp" }
+];
+
+
 function App() {
 
-  const [votesAmsterdam, setVotesAmsterdam] = useState(0);
-  const [votesLondon, setVotesLondon] = useState(0);
+  const [votes, setVotes] = useState<string[]>([]);
 
-  function voteAmsterdam() {
-    setVotesAmsterdam(votesAmsterdam + 1);
+  function vote(city: string) {
+    setVotes([...votes, city]);
   }
-  
-  function voteLondon() {
-    setVotesLondon(votesLondon + 1);
-  }
-  
 
   function reset() {
-    setVotesAmsterdam(0);
-    setVotesLondon(0);
+    setVotes([]);
   }
 
   return (
     <>
       <div>
         <h1>Hello World</h1>
-        <div>Amsterdam: {votesAmsterdam}</div>
-        <button onClick={voteAmsterdam}> vote <img className="voorbeeld" src="/amsterdam.jpg" alt="" /></button>
-        <div>London: {votesLondon}</div>
-        <button onClick={voteLondon}> vote <img className="voorbeeld" src="london.webp" alt="" /></button>
+        <ul>
+          {cities.map(function (city) {
+            return (<div>harro {city.name}
+              <img src={city.image} className="voorbeeld" />
+              </div>)
+          })}
+        </ul>
+        {/* <div>Amsterdam: {votesAmsterdam}</div> */}
+        {/* <button onClick={voteAmsterdam}> vote <img className="voorbeeld" src="/amsterdam.jpg" alt="" /></button> */}
+        {/* <div>London: {votesLondon}</div> */}
+        {/* <button onClick={voteLondon}> vote <img className="voorbeeld" src="london.webp" alt="" /></button> */}
         <button onClick={reset}>Reset</button>
       </div>
-      
+
     </>
   )
 }
